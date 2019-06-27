@@ -2,12 +2,8 @@ from numpy import *
 import operator 
 import sklearn.datasets as datasets
 from sklearn.model_selection import train_test_split
-#from sklearn.model_selection import train_test_split
-#from sklearn.neighbors import KNeighborsClassifier
-
-import numpy as np
 import pandas as pd
-#from pandas import Series, DataFrame
+import matplotlib.pyplot as plt
 
 def createDataSet():
     # 创建训练集
@@ -54,11 +50,28 @@ def score(y_test,result):
             count +=1
         i+=1
     return float(count/i)
-        
+
+def matshow(X_train,y_train,X_test,y_test):
+    plt.figure()
+    plt.subplot(121)
+    plt.scatter(X_train[:,0],X_train[:,1],\
+    c= y_train.reshape(-1))
+    plt.subplot(122)
+    plt.scatter(X_test[:,0],X_test[:,1],\
+    c = y_test.reshape(-1))
+    plt.show()
+
 
 if __name__ == '__main__':
     X_train,X_test,y_train,y_test,labels_names = createDataSet()
     result = classify(X_test,X_train,y_train,10)
     #计算正确率
+    matshow(X_train,y_train,X_test,y_test)
     Score = score(y_test,result)
     print("正确率为：",Score)
+
+
+
+
+
+
